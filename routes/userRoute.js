@@ -22,9 +22,6 @@ const filefilter = (req, file, cb)=>{
 
 const upload = multer({
      storage: storage,
-     limits: {
-      fieldSize: 5 * 1024 * 1024,
-     },
      fileFilter:filefilter
      });
 
@@ -34,7 +31,7 @@ const userController = require('../controllers/userController');
 
 router.post('/register',userController.register);
 router.post('/login',userController.login);
-router.post('/addcustomer',upload.single("image"),userController.addcustomer);
+router.post('/addcustomer',userController.addcustomer);
 router.post('/adminchat',userController.adminchat);
 router.post('/notification',pushNoticationController.sendPushNotification);
 
