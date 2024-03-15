@@ -57,6 +57,7 @@ router.delete('/deletechat/:id',userController.deletechat);
 router.put('/editchat/:id',userController.editchat);
 router.put('/editprofile/:id',userController.editprofile);
 router.put('/totalshow/:id',userController.totalshow);
+router.put('/soundnotification/:id',userController.notification);
 router.put('/changepassword/:id',userController.changepassword);
 router.put('/chatoption/:id',userController.chatoption);
 
