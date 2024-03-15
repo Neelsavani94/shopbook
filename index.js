@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const bodyparser = require('body-parser');
+const path = require('path');
 require('./config/db_connection');
 
 const userRouter = require('./routes/userRoute');
@@ -18,7 +19,7 @@ app.use(bodyparser.urlencoded({ extended:true }));
 app.use(cors());
 
 // app.use('/image',express.static('upload/images'));
-app.use(express.static('public'));
+app.use('/uploads',express.static(path.join(__dirname,'public')));
 
 app.use('/api',userRouter);
 
