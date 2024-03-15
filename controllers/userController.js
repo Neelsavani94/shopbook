@@ -121,7 +121,7 @@ var login = (req,res) => {
   );
 }
 
-var addcustomer = (req,res) => {
+var addcustomer = function (req,res)  {
   
   const password = req.body.password;
   bcrypt.hash(password.toString(),salt,(err,hash)=>{
@@ -134,11 +134,12 @@ var addcustomer = (req,res) => {
         req.body.username,
         req.body.phone,
         hash,
-        req.body.address
+        req.body.address,
+        req.file.filename
        ];
 
         db.query(
-          `INSERT INTO users (admin_id,username,phone,password,address) VALUES (?)`,[value],(err, result) => {
+          `INSERT INTO users (admin_id,username,phone,password,address,image) VALUES (?)`,[value],(err, result) => {
               if(err){
                return res.status(400).send({
                    msg:err
