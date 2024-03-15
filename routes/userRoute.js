@@ -4,7 +4,7 @@ const router = express.Router();
 const path = require('path');
 const multer = require('multer');
 
-// const pushNoticationController = require("../controllers/push_notification_controller");
+const pushNoticationController = require("../controllers/push_notification_controller");
 
 const storage = multer.diskStorage({
      destination: function(req, file,cb){
@@ -33,7 +33,7 @@ router.post('/register',userController.register);
 router.post('/login',userController.login);
 router.post('/addcustomer',userController.addcustomer);
 router.post('/adminchat',userController.adminchat);
-// router.post('/notification',pushNoticationController.sendPushNotification);
+router.post('/notification',pushNoticationController.sendPushNotification);
 
 
 router.post('/send-otp',userController.sendotp);
