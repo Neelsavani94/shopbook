@@ -105,7 +105,7 @@ var login = (req,res) => {
                if(data){
                 const token =  jwt.sign({ id : result[0]['id']} , JWT_SECRET);
                 db.query(
-                  `UPDATE admin SET token = '${token}' WHERE id = '${result[0]['id']}'`
+                  `UPDATE admin SET token = '${token}', fcm_token = '${req.body.fcm_token}' WHERE id = '${result[0]['id']}'`
                );
         
                  return res.status(200).send({
@@ -382,7 +382,7 @@ customerlogin = (req,res) => {
                if(data){
                 const token =  jwt.sign({ id : result[0]['id']} , JWT_SECRET);
                 db.query(
-                  `UPDATE users SET token = '${token}' WHERE id = '${result[0]['id']}'`
+                  `UPDATE users SET token = '${token}', fcm_token = '${req.body.fcm_token}' WHERE id = '${result[0]['id']}'`
                );
         
                  return res.status(200).send({
@@ -436,6 +436,27 @@ const totalshow = (req,res) => {
       return res.status(200).send({
         success: true,
         message:"Total Show Successfully",
+      });
+});
+
+}
+
+const notification = (req,res) => {
+
+  // const authtoken = req.headers.authorization.split(' ')[1];
+  // const decode = jwt.verify(authtoken, JWT_SECRET);
+  const data = [req.body.notification,req.params.id];
+
+  db.query('UPDATE admin SET notification=? WHERE id=?',data, (error, result) => {
+      if(error) {
+        return res.status(400).send({
+            msg:err
+        });
+      }
+
+      return res.status(200).send({
+        success: true,
+        message:"Notification Successfully",
       });
 });
 
@@ -571,5 +592,6 @@ module.exports = {
     changepassword,
     chatoption,
     sendotp,
-    verifyotp
+    verifyotp,
+    notification
 }
