@@ -87,6 +87,8 @@ var login = (req,res) => {
               });
           }
 
+          console.log(result.length);
+
           if(!result.length){
               return res.status(401).send({
                   msg:"Phone or Password is incorrect"
@@ -327,7 +329,7 @@ const editprofile = (req,res) => {
     db.query('UPDATE admin SET username=?,phone=?,address=?,businessname=? WHERE id=?',data, (error, result) => {
         if(error) {
           return res.status(400).send({
-              msg:err
+              msg:error
           });
         }
 
